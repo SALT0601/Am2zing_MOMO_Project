@@ -1,0 +1,182 @@
+
+@import "/css/fonts.css";
+* {
+  margin: 0;
+  padding: 0;
+ font-family: '빙그레','빙그레bold';
+   
+}
+
+clearfix::before,
+clearfix::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	/* background: ; */
+	height: auto;
+	min-height: 100%;
+	padding-bottom: 80px;
+}
+
+
+a {
+  text-decoration: none;
+}
+
+li,
+ol,
+ul {
+  list-style: none;
+}
+
+table {
+  border-spacing: 0;
+}
+
+input:focus {
+  outline: none;
+}
+
+#wrap {
+  width: 100%;
+  margin: 0px auto;
+}
+
+.inner {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+
+.div_table{
+	display:table;
+	border-collapse:collapse;
+	width:400px;
+	table-layout:fixed;
+	}
+	
+.div_table_row{
+	display:table-row;
+	border : solid 2px #FFCD4A;
+	  display: block;
+	  width: 300px;
+	  height: 200px;
+	  box-shadow: 2px 2px 2px  2px  lightgray;
+	  background: linear-gradient(to top, #fff 80%, #FFCD4A 20%);
+	}
+
+
+	
+.div_table_cell{
+	display:table-cell; 
+	}
+	
+	
+#contents {
+    float: right;
+    width: 1250px;
+    height: 750px;
+
+}
+
+
+#placeimg {
+    float: left;
+    width: 330px;
+    height: 250px;
+
+    opacity:0.8;
+    border-radius: 20px;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.title{
+	text-align:center;
+	font-weight:bold;
+	font-size:25px;
+	display: inline-block;
+	color: black;
+}
+
+.titlearea{
+	display: grid;
+	place-items: center;
+	word-break:break-all;
+	width:330px;
+	height:150px;
+	padding:10px;
+}
+.info{
+	width:330px;
+	height:50px;
+	padding:10px;
+	font-size:20px;
+}
+.list_area{
+	display: grid;
+	place-items: center;
+	margin: 15px;
+}
+.list_name{
+	font-size: 30px;
+	text-align:center;
+	margin: 0 auto;
+	font-weight: bold;
+    width: 200px;
+    height: 50px;
+    background-color: #FFCD4A;
+ 	border-radius: 20px;
+ 	box-shadow: 1px 1px 1px 1px lightgray;
+}
+
+.list_name span {
+	color: white
+}
+.pagearea{
+	width: 1440px;
+	float: left;
+	display: grid;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	bottom: 0;
+	right:0;
+	height: 100px;
+}
+.paging {
+     display:block;
+   margin: 0 auto;
+  }
+.post_btn{
+	position: fixed;
+	float:right;
+	display:grid;
+	width:100px;
+	right:30px;
+	bottom:30px;
+}
+
+.btn{
+	font-weight:bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+    background-color: #FFCD4A;
+    width:100px;
+    height: 100px;
+    font-size: 50px;
+    text-align: center;
+    border-radius: 50px;
+}
+.btn:hover{
+	color:lightgray;
+}

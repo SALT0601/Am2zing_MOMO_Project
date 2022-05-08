@@ -1,0 +1,59 @@
+@import "/css/fonts.css";
+* { font-family: '빙그레','빙그레bold';}
+
+.contents {
+    float: right;
+    width: 1200px;
+    height: 750px;
+}
+/* ------------------end of section----------------- */  
+  .policy-table {
+    color: grey;
+    text-align: center;
+  }
+  
+  .headings, .policy {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    padding: 1em;
+  }
+  
+  .heading {
+    flex-basis: 33.333%;
+    font-weight: bold;
+  }
+  
+  .policy {
+    border-radius: 2em;
+    background-color: white;
+    margin-bottom: 20px;
+    -moz-box-shadow: 0 0 3px grey;
+    -webkit-box-shadow: 0 0 3px grey;
+    box-shadow: 0 0 5px grey;
+  }
+  
+  section span {
+    flex-basis: 33.333%;
+  }
+  
+  .policy a {
+    text-decoration: none;
+    color: #4c4c4c;
+  }
+
+  .delete_btn {
+    border: none;
+    background-color: white;
+  }
+  /* ------------------end of table----------------- */  
+
+  .paging {
+    position: absolute;
+    left: 50%;
+    bottom: 15%;
+  }

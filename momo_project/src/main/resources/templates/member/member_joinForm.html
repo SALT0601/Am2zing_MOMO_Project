@@ -1,0 +1,136 @@
+<!--회원가입 페이지-->
+<!--signup.html-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+  <head>
+    <meta charset="UTF-8" />
+    <title>MOMO: 회원가입</title>
+    <link rel="stylesheet" href="/css/login.css"/>
+     <link rel="stylesheet" href="/css/fragment.css">
+   <th:block th:replace="fragments :: flg_header"></th:block>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+  </head>
+    
+    <body class="login_body">
+    <div class="login_main">
+      <h1>회원가입</h1>
+       <form method="post"  th:action="@{/joinProc}" id="join" name="join" onsubmit="return checkAll();">
+        
+        <div>
+        <div class="inp_field">
+         <input type="text" id="memNickname" name="memNickname" autocomplete="off">
+          <span></span>
+          <label>닉네임 (5글자 이하)</label>
+          </div>
+          <div class="inp_field" style="margin-top:-15px;">
+        <input type="button" id="memNicknameOverlay" onclick="memNicknameCheck()" value="중복 체크"/>
+        <input type="button" id="resetMemNickname" onclick="reMemNickname()"  style = "display:none;" disabled value="다시입력"/>
+        </div>
+       </div>
+       
+		<div>
+        <div class="inp_field">
+        <input type="email"  id="memEmail" name="memEmail"   autocomplete="off" >
+         <span></span>
+         <label>이메일</label>
+         </div>
+          <div class="inp_field" style="margin-top:-15px;">
+        <input type="button" id="memEmailOverlay" onclick="memEmailCheck()" value="중복 체크"/>
+        <input  type="button" id="resetMemEmail" onclick="reMemEmail()" style = "display:none;" disabled value="다시입력"/>
+        </div>
+          </div>
+        
+          <div class="inp_field">
+    	  <input onchange="pwSame()" type="password" id="memPassword" name="memPassword"  autocomplete="off"> 
+            <span></span>
+            <label>비밀번호 4 ~ 12자의 영문과 숫자로만 입력</label>
+          </div>
+           <div class="inp_field">
+    	 	
+			<input onkeyup="pwSame()" type="password" id="memPassword_Check" name="memPassword_Check" autocomplete="off">
+            <span></span>
+            <label>비밀번호 확인</label>
+          </div>
+          <span id="pw_check_msg"></span>
+            
+        <div class="inp_field" >
+            <label style="top:-5px;" for="memBirth">생년월일</label>
+             <input id="birthdate" type="date" name="memBirth">
+             </div>
+            
+   			<!--  <div id="memBirth" onchange="checkBirth()">
+     		 <div class="birth dropdown">
+            <select class="form-control" id="year" name="year">
+                <option value="">년(YY)</option>
+                <th:block th:each="a: ${#numbers.sequence(2022,1900)}">
+                    <option th:value="${a}" th:text="${a}"></option>
+                </th:block>
+            </select>
+        </div>
+        
+        
+
+        <div class="birth mx-1 dropdown">
+            <select class="form-control" id="month" name="month">
+                <option value="">월(mm)</option>
+                <th:block th:each="month: ${#numbers.listFormatInteger(#numbers.sequence(1,12),2)}">
+                    <option class="dropdown-item" th:value="${month}" th:text="${month}"></option>
+                </th:block>
+            </select>
+        </div>
+
+        <div class="birth dropdown">
+            <select class="form-control" id="day" name="day">
+                <option value="">일(dd)</option>
+                <th:block th:each="day: ${#numbers.listFormatInteger(#numbers.sequence(1,31),2)}">
+                    <option class="dropdown-item" th:value="${day}" th:text="${day}"></option>
+                </th:block>
+            </select>
+        </div>
+        <span id="birth_check_msg"></span>
+    </div> -->
+
+      
+        <div class="inp_field" >
+            <label style="top:-8px;" for="memBirth">MBTI</label>
+       <div id="memMbti" onchange="checkMbti()">
+     	<select name="memMbti">
+        <option value="noMbti">MBTI 선택</option>
+        <option value="ISTJ">ISTJ</option>
+        <option value="ISTP">ISTP</option>
+        <option value="ISFJ">ISFJ</option>
+        <option value="ISFP">ISFP</option>
+        <option value="INTJ">INTJ</option>
+        <option value="INTP">INTP</option>
+        <option value="INFJ">INFJ</option>
+        <option value="INFP">INFP</option>
+        <option value="ESTJ">ESTJ</option>
+        <option value="ESTP">ESTP</option>
+        <option value="ESFJ">ESFJ</option>
+        <option value="ESFP">ESFP</option>
+        <option value="ENTJ">ENTJ</option>
+        <option value="ENTP">ENTP</option>
+        <option value="ENFJ">ENFJ</option>
+        <option value="ENFP">ENFP</option>
+      </select>
+      <span id="Mbti_check_msg"></span>
+      </div>
+      </div>
+             
+          <button class="lg_submit" type="submit">회원가입</button>
+        	<div class="signup_link">이미 회원이신가요?
+         	 <a href="/member/login">로그인 하기</a>
+        </div>
+            </form>
+        </div>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/join.js"></script>
+   
+ 
+  </body>
+</html>

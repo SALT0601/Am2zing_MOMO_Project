@@ -1,0 +1,45 @@
+.deletePlace {
+			width: 50px;
+			height: 30px;
+			background-color: #FFCD4A;
+			border: 0;
+			border-radius: 10px;
+			font-size: 13px;
+			font-weight: bold;
+			color: rgb(0, 0, 0);
+			cursor: pointer;
+		}
+
+
+		table tbody td {
+			border-top: 1rem solid black;
+			border-bottom: 1rem solid;
+			border-color: transparent;
+		}
+
+		.place_name {
+			font-size: 22px;
+			text-align: center;
+			line-height: 50px;
+			font-weight: bold;
+			border: 3px solid #FFCD4A;
+			background-color: white;
+			border-radius: 10px;
+			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+		}
+
+		.add_place {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px;
+
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border: 3px solid #FFCD4A;
+			border-radius: 10px;
+			width: 470px;
+			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+			background-color: white;
+			text-align: center;
+		}

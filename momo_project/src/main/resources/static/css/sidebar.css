@@ -1,0 +1,87 @@
+/* ===== Google Font Import - Poppins ===== */
+
+@import "/css/fonts.css";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+     font-family: '빙그레','빙그레bold';
+    transition: all 0.4s ease;;
+}
+
+ol, ul {
+	padding-left: 0;
+}
+
+
+body{
+    height: 120vh;
+    
+}
+
+
+.sidebar{
+    position: fixed;
+    top: 100px;
+    left: 0;
+    height: 100px;
+    width: 20%;
+  
+    z-index: 100;
+}
+
+nav .nav-bar .logo a{
+    font-size: 25px;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+}
+
+.nav-bar .nav-links{
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar .nav-links li{
+    
+    list-style: none;
+}
+
+.nav-links li a{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+}
+
+    .menu{
+        position: fixed;
+        height: 100%;
+        width: 320px;
+        left: -100%;
+        top: 0;
+        padding: 20px;
+        background-color: black;
+        z-index: 100;
+        transition: all 0.4s ease;
+    }
+
+   
+
+    .nav-bar .navLogo a{
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    .nav-bar .nav-links{
+        flex-direction: column;
+        padding-top: 30px;
+    }
+
+    .nav-links li a{
+        display: block;
+        margin-top: 20px;
+    }
+

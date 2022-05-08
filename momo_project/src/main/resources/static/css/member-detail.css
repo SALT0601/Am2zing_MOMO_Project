@@ -1,0 +1,304 @@
+@charset "utf-8";
+ @import "/css/fonts.css";
+ *{
+	 font-family: '빙그레','빙그레bold';
+}
+.all {
+  padding-top: 50px;
+  margin-bottom: 150px;
+  height: 650px;
+}
+
+aside {
+  float: left;
+  width: 180px;
+  height: auto;
+  border-right: 2px solid rgb(133, 133, 133);
+  text-align: center;
+}
+
+aside .button_1 {
+  width: 150px;
+  background-color: rgb(203, 203, 203);
+  border: 2px solid rgb(185, 185, 185);
+  border-radius: 20px;
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  color: rgb(75, 75, 75);
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+aside .button_2 {
+  width: 150px;
+  background-color: rgb(203, 203, 203);
+  border: 2px solid rgb(185, 185, 185);
+  border-radius: 20px;
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  color: rgb(75, 75, 75);
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+aside .button_3 {
+  width: 150px;
+  background-color: rgb(203, 203, 203);
+  border: 2px solid rgb(185, 185, 185);
+  border-radius: 20px;
+  text-align: center;
+  padding: 10px 0;
+  color: rgb(75, 75, 75);
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* <!--------------------end of aside-------------------> */
+.contents {
+  float: right;
+  width: 1250px;
+  height: 750px;
+}
+
+:root { 
+	-background: #424242; 
+	-navbar: #ffffff; 
+	-board-back: #ddd; 
+	-board-word: #000; 
+	-btn-col: #6e6e6e;
+}
+
+ul, li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit; /* 컬러는 상속 */
+}
+
+body {
+	/* background: ; */
+	height: auto;
+	min-height: 100%;
+	padding-bottom: 80px;
+}
+
+.login_main {
+	box-shadow: 5px 5px 5px 5px gray;
+	width: 400px;
+	margin: 0 auto;
+	margin-bottom: 50px;
+	background: #0000;
+	border-radius: 10px;
+}
+
+.login_main h1 {
+	text-align: center;
+	padding: 20px 0 20px 0;
+	font-size: 40px;
+	border-bottom: 1px solid #000;
+}
+
+.login_main form {
+	padding: 0 40px;
+	box-sizing: border-box;
+}
+
+.inp_field_button {
+	position: center;
+	border-bottom: 2px solid #000;
+	margin: 30px 0;
+	
+}
+
+form .inp_field {
+	position: relative;
+	border-bottom: 2px solid #000;
+	margin: 30px 0;
+}
+
+.inp_field input {
+	width: 100%;
+	padding: 0 5px;
+	height: 40px;
+	font-size: 16px;
+	border: none;
+	background: none;
+	outline: none;
+}
+
+.inp_field label {
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	color: #999;
+	transform: translateY(-50%);
+	font-size: 16px;
+	pointer-events: none;
+	transition: 0.5s;
+	top: -5px;
+}
+
+.inp_field span::before {
+	content: '';
+	position: absolute;
+	top: 40px;
+	left: 0;
+	width: 0%;
+	height: 2px;
+	background: #585858;
+	transition: 0.5s;
+}
+.login_error{
+	text-align: center;
+	margin : 10px auto;
+	font-size: 1.5rem;
+	color: red;
+}
+
+.forgot {
+	width: 100%;
+	display: flex;
+	margin: -5px 0 20px 5px;
+	color: #999;
+	cursor: pointer;
+}
+
+.forgot .id:hover, .forgot .pw:hover {
+	text-decoration: underline;
+}
+
+.lg_submit {
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	border: 1px solid;
+	background: #999;
+	border-radius: 25px;
+	font-size: 18px;
+	color: #ddd;
+	font-weight: bold;
+	outline: none;
+	margin-bottom: 15px
+}
+
+.lg_submit:hover {
+	border-color: #999;
+	transition: 0.5s;
+}
+
+.signup_link {
+	margin: 20px 0;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 16px;
+	color: #999;
+}
+
+.signup_link a {
+	color: #585858;
+}
+
+.signup_link a:hover {
+	text-decoration: underline;
+}
+
+/* .sec_left {
+  float: left;
+  width: calc(100% / 2);
+  height: 70%;
+}
+
+.sec_right {
+  float: left;
+  width: calc(100% / 2);
+  height: 100%;
+}
+
+.inner_left {
+  width: 500px;
+  height: 500px;
+  border: 2px solid gray;
+  border-radius: 50px;
+  margin: auto;
+}
+
+.inner_right {
+  width: 600px;
+  height: 750px;
+  border: 2px solid gray;
+  border-radius: 50px;
+  margin: auto;
+} */
+
+/* .profile_box {
+  width: 200px;
+  height: 200px;
+  border-radius: 70%;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 20%;
+}
+.profile_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nickname_box {
+  display: block;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.nickname {
+  width: 100%;
+  border: none;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.btn_edit {
+  margin-top: 10px;
+  border: none;
+  background-color: white;
+  width: 32px;
+  height: 32px;
+}
+
+.btn_edit_img {
+  width: 32px;
+  height: 32px;
+}
+
+.info {
+  position: relative;
+  top: 5%;
+  left: 10%;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.infos {
+  position: relative;
+  top: 15%;
+  left: 10%;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.infos label {
+    width: 100px;
+}
+
+.infos input {
+    border: none;
+    margin: 30px;
+} */

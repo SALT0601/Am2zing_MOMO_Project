@@ -1,0 +1,305 @@
+@import "/css/fonts.css";
+
+#placesList .info .jibun {
+    padding-left: 26px;
+    background:
+        url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
+}
+
+
+#placesList .item .markerbg {
+    float: left;
+    position: absolute;
+    width: 36px;
+    height: 37px;
+    margin: 10px 0 0 10px;
+    background:
+        url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
+}
+
+
+#placesList .item .marker_1 {
+    background-position: 0 -10px;
+}
+
+#placesList .item .marker_2 {
+    background-position: 0 -56px;
+}
+
+#placesList .item .marker_3 {
+    background-position: 0 -102px
+}
+
+#placesList .item .marker_4 {
+    background-position: 0 -148px;
+}
+
+#placesList .item .marker_5 {
+    background-position: 0 -194px;
+}
+
+#placesList .item .marker_6 {
+    background-position: 0 -240px;
+}
+
+#placesList .item .marker_7 {
+    background-position: 0 -286px;
+}
+
+#placesList .item .marker_8 {
+    background-position: 0 -332px;
+}
+
+#placesList .item .marker_9 {
+    background-position: 0 -378px;
+}
+
+#placesList .item .marker_10 {
+    background-position: 0 -423px;
+}
+
+#placesList .item .marker_11 {
+    background-position: 0 -470px;
+}
+
+#placesList .item .marker_12 {
+    background-position: 0 -516px;
+}
+
+#placesList .item .marker_13 {
+    background-position: 0 -562px;
+}
+
+#placesList .item .marker_14 {
+    background-position: 0 -608px;
+}
+
+#placesList .item .marker_15 {
+    background-position: 0 -654px;
+}
+
+#pagination {
+    margin: 10px auto;
+  
+}
+
+
+
+
+.item3-place h2,
+.item3-place img,
+.item3-place span {
+    margin-bottom: 5px;
+}
+
+.item3-place span {
+    font-size: 20px;
+}
+
+
+
+
+.map_wrap,
+.map_wrap * {
+    margin: 0;
+    padding: 0;
+     font-family: '빙그레','빙그레bold';
+
+    font-size: 12px;
+}
+
+.map_wrap a,
+.map_wrap a:hover,
+.map_wrap a:active {
+    color: #000;
+    text-decoration: none;
+}
+
+.map_wrap {
+   
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 10px;
+}
+
+#menu_wrap {
+    position: absolute;
+  
+    width: 450px;
+    right: 2%;
+    top: 2%;
+    transform: translateX(-50);
+    padding: 5px;
+    overflow-y: scroll;
+    background: none;
+    z-index: 1;
+ text-align: center;
+    border-radius: 10px;
+}
+
+#menu_wrap::-webkit-scrollbar {
+    display: none;
+}
+
+#title {
+	margin: 15px; position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			width: 350px;
+			height: 50px;
+			left: 2%; 
+			top: 2%;
+			transform: translateX(-50);
+			padding: 5px;
+			overflow-y: scroll;
+			background-color:#FFCD4A;
+			z-index: 1;
+			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+			border-radius: 15px;
+}
+ #title::-webkit-scrollbar {
+	display: none;
+}
+
+.contt {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.topBtn {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(94, 113, 161);
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.list123 {
+    width: 400px;
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+.a-tag {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+
+
+.list-color {
+    width: 400px;
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+    text-align: left;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+
+
+h2 {
+    color: rgb(37, 60, 81);
+    margin: 0;
+    padding: 0;
+}
+
+#btns-box {
+	display: flex; 
+	justify-content: space-between;
+	 margin: 15px;
+	  position: absolute;
+			width: 300px;
+		height: 50px;
+		left: 2%; 
+		bottom:2%;
+		transform: translateX(-50);
+		
+		overflow-y: hidden;
+		background-color: none;
+		z-index: 2;
+		padding: 5px;
+		align-items:center;
+		border-radius: 10px;
+}
+ 
+.btns button {
+    border-radius: 25px;
+    border: solid 6px;
+    border-color: #FFCD4A;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+}
+
+#replyContent {
+	padding: 5px;
+}
+@keyframes heartBeat {
+  0% {
+    color: white;
+    transform: none;
+  }
+  50% {
+    color: tomato;
+    transform: scale(1.5);
+  }
+  100% {
+    color: white;
+    transform: none;
+  }
+}
+i {
+	color :black;
+}
+ #btn-unbookmark i,
+  #btn-bookmark i {
+	color: tomato;
+	
+}
+ #btn-unbookmark:hover i,
+ #btn-bookmark:hover i
+{
+  will-change: transform;
+  animation: heartBeat 1s linear infinite;
+}
+
+
+.box1 button {
+	width: 70px;
+	height: 30px;
+	background-color:  #FFCD4A;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    font-size: 10pt;
+    font-weight: 600;
+}
+.box1 {
+	height: 600px;
+}
+textarea {
+	width: 400px;	
+	
+			border: solid 2px  #FFCD4A;
+			border-radius: 10px;
+			font-size: 16px;
+			height: 30px; 
+			resize: none; 
+			text-align: center;
+			padding: 10px;
+}

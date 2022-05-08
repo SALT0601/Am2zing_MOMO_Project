@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="fragments :: flg_head"></th:block>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/boardBookmark.css" />
+    <title>MOMO: 내 북마크</title>
+    <th:block th:replace="fragments :: flg_header"></th:block>
+  </head>
+
+  <body>
+    <div class="inner">
+      <!--end of header-->
+        <div class="list_area">
+          <div class="list_name">
+          <span>북마크</span>
+          </div>
+        </div>	
+          
+          <div class="div_table" id="contents">
+          <div class="div_table_row" id="placeimg" th:each="boardBookmark : ${boardBookmarks}">
+            <div class="info">
+              <div class="div_table_cell" style="width:130px; height:50px;">
+                <span><i class="fa-solid fa-user"></i></span>
+                <span th:text="${boardBookmark.board.member.memNickname}"></span>
+              </div>
+              <div class="div_table_cell" style="width:70px; height:50px;">
+               <span th:text="${boardBookmark.board.member.memMbti}"></span>
+             </div>
+             <div class="div_table_cell" style="width:130px; height:50px; text-align:right; ">
+               <span><i class="fa-solid fa-eye"></i></span>
+               <span th:text="${boardBookmark.board.placeCnt}"></span>
+             </div>
+            </div>
+
+              <div class="titlearea">
+                <div class="div_table_cell">
+                   <a th:href="@{'/post/' + ${boardBookmark.board.boardNum}}">
+                   <span class="title" th:text="${boardBookmark.board.boardTitle}"></span>
+                   </a>
+                 </div>
+               </div>
+           </div>	
+        </div>
+         <div class="pagearea">
+           
+          <div th:replace="fragments :: paging"></div>
+        </div>
+    </div>
+    
+   
+    </body>
+</html>

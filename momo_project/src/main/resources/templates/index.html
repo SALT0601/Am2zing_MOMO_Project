@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/5168478d86.js"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/slick.css">
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/fragment.css">
+
+<title>MOMO</title>
+
+<th:block th:replace="fragments :: flg_header"></th:block>
+		
+</head>
+
+<body>
+	<div id="wrap">
+	
+		
+
+		<!-- ------------------end of header------------------->
+
+		<section class="banner">
+			<div>
+				<a href="#"><img src="/images/banner/open_banner.png" alt="bannerImg1"></a>
+
+			</div>
+		</section>
+
+		<!-- ------------------end of section(banner)------------------->
+		<script>$('#slider-div').slick('goTo', 5);</script>
+		
+		<section class="mbti inner center">
+			<div th:if="${memMbti!=null}">
+				 <div class="items">
+                    <a href="/board/INFP"><img src="/images/MBTI/${member.memMbti}.png" alt="mbti"></a>
+                </div>
+		</div>
+                <div class="items">
+                    <a href="/board/INFP"><img src="/images/MBTI/INFP.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ESFJ"><img src="/images/MBTI/ESFJ.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ISTP"><img src="/images/MBTI/ISTP.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ENTP"><img src="/images/MBTI/ENTP.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/INFJ"><img src="/images/MBTI/INFJ.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ISTJ"><img src="/images/MBTI/ISTJ.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ESFP"><img src="/images/MBTI/ESFP.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/INTJ"><img src="/images/MBTI/INTJ.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ENFJ"><img src="/images/MBTI/ENFJ.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ESTJ"><img src="/images/MBTI/ESTJ.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ISFP"><img src="/images/MBTI/ISFP.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ENTJ"><img src="/images/MBTI/ENTJ.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ISFJ"><img src="/images/MBTI/ISFJ.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ENFP"><img src="/images/MBTI/ENFP.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/ESTP"><img src="/images/MBTI/ESTP.png" alt="mbti"></a>
+                </div>
+                <div class="items">
+                    <a href="/board/INTP"><img src="/images/MBTI/INTP.png" alt="mbti"></a>
+                </div>
+            </section>
+    
+		<!--------------------end of section(mbti)------------------->
+
+		<section class="cards inner">
+
+			<a class="card1" href="/top3/INFP"><img src="/images/card-img/infp.png" alt=""></a>
+			<a class="card2" href="/top3/ENFP"><img src="/images/card-img/infp2.png" alt=""></a>
+			<a class="card3" href="/top3/INFP"><img src="/images/card-img/infp3.png" alt=""></a>
+
+		</section>
+
+		<!--------------------end of section(cardSection)------------------->
+
+		<footer>
+				<th:block th:replace="fragments :: footer"></th:block>
+		</footer>
+	</div>
+
+
+	<!--------------------end of footer------------------->
+
+	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script src="/js/slick.min.js"></script>
+	<script src="/js/main.js"></script>
+</body>
+
+</html>

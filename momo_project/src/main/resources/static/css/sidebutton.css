@@ -1,0 +1,60 @@
+@charset "utf-8";
+@import "/css/fonts.css";
+*{
+	 font-family: '빙그레','빙그레bold';
+}
+.all {
+    padding-top: 50px;
+    margin-bottom: 150px;
+    height: 650px;
+}
+
+aside {
+    float: left;
+    width: 180px;
+    height: 580px;
+    border-right: 2px solid rgb(133, 133, 133);
+    text-align: center;
+}
+
+aside .button_1 {
+    width: 150px;
+    background-color: rgb(203, 203, 203);
+    border: 2px solid rgb(185, 185, 185);
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    color: rgb(75, 75, 75);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+aside .button_2 {
+    width: 150px;
+    background-color: rgb(203, 203, 203);
+    border: 2px solid rgb(185, 185, 185);
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    color: rgb(75, 75, 75);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+aside .button_3 {
+    width: 150px;
+    background-color: rgb(203, 203, 203);
+    border: 2px solid rgb(185, 185, 185);
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px 0;
+    color: rgb(75, 75, 75);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* <!--------------------end of aside-------------------> */

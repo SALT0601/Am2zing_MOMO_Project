@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8">
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/sidebar.css">
+</head>
+<body>
+<div th:fragment="mySideBar">
+
+    <nav class="sidebar">
+      <ul class="nav-links" >
+        <li>  <a th:href="@{/member/mypage}">내 정보 수정</a></li>
+        <li>  <a th:href="@{/member/board/{memId}(memId=${member.memId})}">내 게시물</a></li>
+        <li> <a th:href="@{/member/comment/{memId}(memId=${member.memId})}">내 댓글</a></li>
+        <li> <a th:href="@{/member/pwdEdit}">패스워드 변경</a></li>
+       </ul>
+	</nav>
+ </div>
+</body>
+</html>

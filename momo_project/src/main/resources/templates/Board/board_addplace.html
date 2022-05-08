@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymelaf.org" lang="ko" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<th:block th:replace="fragments :: flg_head"></th:block>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/css/addplace.css">
+	<title>MOMO: 글쓰기</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body>
+	<th:block th:replace="fragments :: flg_header"></th:block>
+	<div class="bg">
+		<br>
+		<div class="list_area">
+			<div class="list_name">
+				<span>글작성</span>
+
+			</div>
+		</div>
+		<section style="background-color: white;" class="inner">
+
+			<div class="sec_left"
+				style=" flex-wrap: nowrap; display: flex; flex-direction: column; justify-content: space-between;">
+
+				<!-- 모달연습 -->
+				<div id="modal" class="modal-overlay">
+					<div class="modal-window">
+
+						<div id="wrapper">
+							<div class="map_wrap">
+												<div id="close_modal">
+
+										<div class="close-area">X</div>
+									</div>
+								<div id="map"
+									style="border-radius:10px; width: 1130px; height: 650px; position: relative; overflow: hidden;">
+								</div>
+								<div id="menu_wrap" class="bg_white">
+									<div class="option">
+										<div>
+											키워드 : <input type="text" value="서울역" id="keyword" size="15">
+											<button class="addbtn4" onclick="searchPlaces(); return false;">장소
+												검색</button>
+										</div>
+									</div>
+									<br>
+									<hr>
+									
+				
+
+									<ul id="placesList"></ul>
+
+									<div id="pagination"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="left_title">
+					<!-- 위도 및 경도 좌표 및 위치정보 -->
+					<div>
+						<input type="text" id="fulladdress" name="fulladdress" class="comment2" disabled>
+						<button class="locationbtn" onclick="writeplaycard()">장소 검색</button>
+					</div>
+				</div>
+				<input hidden type="text" id="placeTitle" name="placeTitle" value="" readonly>
+				<input hidden type="text" id="placeLat" name="placeLat" value="" readonly>
+				<input hidden type="text" id="placeLng" name="placeLng" value="" readonly>
+				<input hidden type="text" id="placeId" name="placeId" value="" readonly>
+				<input hidden type="number" id="boardNum" name="boardNum" th:value="${boardNum}" readonly>
+				<input hidden name="memEmail" th:value="${#authentication.name}">
+
+				<div class="left_img">
+					<label for="file1"></label>
+					<span class="cameraImg">
+						<img src='/images/camera-4-70.png' class='profileImg' id='profileImg'>
+					</span>
+					<input type="file" id="file1" name="file1" style="visibility:hidden; display: none;">
+
+
+					<div class="img_wrap" style="margin-left:230px;">
+						<img style="width:170px; height:170px; border:solid 1px; border-radius:10px;" id="img"
+							name="img">
+						<button id="imgBtn" class="addbtn3" onclick="javascript:fn_submit()">사진 추가</button>
+					</div>
+
+				</div>
+				<div class="left_comment">
+					<div id="commentbox">
+						<textarea class="comment" id="placeContent" name="placeContent" spellcheck="false"></textarea>
+						<button id="submitBtn" class="addbtn">장소 추가</button>
+					</div>
+				</div>
+				<div class="left_btns">
+					<div id="addbtnbox">
+						<a id="cancel" th:href="@{'/cancel/' + ${boardNum}}" role="button"><button class="addbtn2">취
+								소</button></a>
+						<a th:href="@{'/post/' + ${boardNum}}" role="button"><button class="addbtn2">작성 완료</button></a>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="sec_right">
+				<div
+					style="box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5); text-align: center;  border-radius: 10px; text-align:center; color:middelyellow; font-size: 20px; height: 50px; font-weight: bold;  background-color: white;">
+					<span style="line-height: 50px;">현재 추가된 장소</span>
+				</div>
+				<div style="align-items: center;" id="resDiv" class="places"></div>
+				<div id="placeImg"></div>
+			</div>
+
+		</section>
+	</div>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
+	<script>
+
+		$('#submitBtn').click(function () {
+			let boardNum = document.getElementById("boardNum").value;
+			var tempData = {
+				"placeTitle": $('input[name="placeTitle"]').val(),
+				"placeLat": $('input[name="placeLat"]').val(),
+				"placeLng": $('input[name="placeLng"]').val(),
+				"placeId": $('input[name="placeId"]').val(),
+				"boardNum": $('input[name="boardNum"]').val(),
+				"placeImg": $('input[name="placeImg"]').val(),
+				"placeContent": $('#placeContent').val(),
+				"memEmail": $('input[name="memEmail"]').val()
+			};
+
+			if ($('input[name="placeTitle"]').val() == "") {
+				alert("장소를 추가해주세요!")
+			} else {
+				$.ajax({
+					url: "/placeList/" + boardNum,
+					type: "POST",
+					async: true,
+					contentType: "application/json; charset=UTF-8",
+					data: JSON.stringify(tempData),
+					success: function (data) {
+						$('input[name="fulladdress"]').val("");
+						$('input[name="placeTitle"]').val("");
+						$('input[name="placeLat"]').val("");
+						$('input[name="placeLng"]').val("");
+						$('input[name="placeId"]').val("");
+						$('input[name="placeImg"]').val("");
+						$('#placeContent').val("");
+						$("#img").attr("src", "");
+						$('#resDiv').html(data)
+					}
+				});
+			}
+		})
+		//이미지 미리보기
+		var sel_file;
+		$(document).ready(function () {
+			$("#file1").on("change", handleImgFileSelect);
+		});
+
+		function handleImgFileSelect(e) {
+			var files = e.target.files;
+			var filesArr = Array.prototype.slice.call(files);
+			var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+
+			filesArr.forEach(function (f) {
+				if (!f.type.match(reg)) {
+					alert("확장자는 이미지 확장자만 가능합니다.");
+					return;
+				}
+
+				sel_file = f;
+
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$("#img").attr("src", e.target.result);
+				}
+				reader.readAsDataURL(f);
+			});
+		}
+		//이미지 업로드
+		function fn_submit() {
+			if ($('input[name="placeTitle"]').val() == "") {
+				alert("장소를 추가해주세요!")
+			} else {
+				var form = new FormData();
+				form.append("file1", $("#file1")[0].files[0]);
+
+
+				$.ajax({
+					url: "/upload",
+					type: "POST",
+					processData: false,
+					contentType: false,
+					data: form,
+					success: function (response) {
+						alert("사진 추가 완료!");
+						$('#placeImg').html(response);
+					},
+					error: function (jqXHR) {
+						alert("이미지파일을 선택해주세요");
+					}
+				});
+			}
+		}
+		// 모달연습
+		function writeplaycard() {
+			const modal = document.getElementById("modal")
+
+			modal.style.display = "flex"
+			map.relayout();
+			event.preventDefault();
+		}
+
+		const closeBtn = modal.querySelector(".close-area")
+		closeBtn.addEventListener("click", e => {
+			modal.style.display = "none"
+		})
+
+		modal.addEventListener("click", e => {
+			const evTarget = e.target
+			if (evTarget.classList.contains("modal-overlay")) {
+				modal.style.display = "none"
+			}
+		})
+
+		function close_modal() {
+			modal.style.display = "none"
+			event.preventDefault();
+		}
+
+		//
+		function search() {
+			const maparea = document.getElementById("maparea")
+
+			maparea.style.display = "flex"
+		}
+
+		// 마커를 담을 배열입니다
+		var markers = [];
+
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = {
+				center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+				level: 3 // 지도의 확대 레벨
+			};
+
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+
+		// 장소 검색 객체를 생성합니다
+		var ps = new kakao.maps.services.Places();
+
+		// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
+
+		// 키워드로 장소를 검색합니다
+		searchPlaces();
+
+		// 키워드 검색을 요청하는 함수입니다
+		function searchPlaces() {
+			var keyword = document.getElementById('keyword').value;
+
+			if (!keyword.replace(/^\s+|\s+$/g, '')) {
+				alert('키워드를 입력해주세요!');
+				return false;
+			}
+
+			// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+			ps.keywordSearch(keyword, placesSearchCB);
+		}
+
+		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+		function placesSearchCB(data, status, pagination) {
+			if (status === kakao.maps.services.Status.OK) {
+
+				// 정상적으로 검색이 완료됐으면
+				displayPlaces(data);
+
+				// 페이지 번호를 표출합니다
+				displayPagination(pagination);
+
+			} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+
+				alert('검색 결과가 존재하지 않습니다.');
+				return;
+
+			} else if (status === kakao.maps.services.Status.ERROR) {
+
+				alert('검색 결과 중 오류가 발생했습니다.');
+				return;
+
+			}
+		}
+
+		// 검색 결과 목록과 마커를 표출하는 함수입니다
+		function displayPlaces(places) {
+
+			var listEl = document.getElementById('placesList'),
+				menuEl = document.getElementById('menu_wrap'),
+				fragment = document.createDocumentFragment(),
+				bounds = new kakao.maps.LatLngBounds(),
+				listStr = '';
+
+
+			// 검색 결과 목록에 추가된 항목들을 제거합니다
+			removeAllChildNods(listEl);
+
+			// 지도에 표시되고 있는 마커를 제거합니다
+			removeMarker();
+
+			for (var i = 0; i < places.length; i++) {
+
+				// 마커를 생성하고 지도에 표시합니다
+				var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
+					marker = addMarker(placePosition, i),
+					itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+
+				// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+				// LatLngBounds 객체에 좌표를 추가합니다
+				bounds.extend(placePosition);
+
+				// 마커와 검색결과 항목에 mouseover 했을때
+				// 해당 장소에 인포윈도우에 장소명을 표시합니다
+				// mouseout 했을 때는 인포윈도우를 닫습니다
+				(function (marker, pname, praddress, paddress, plat, plng, pid) {
+					kakao.maps.event.addListener(marker, 'mouseover', function () {
+						displayInfowindow(marker, pname);
+					});
+
+					kakao.maps.event.addListener(marker, 'click', function () {
+						var position = this.getPosition();
+						var url = 'https://map.kakao.com/link/map/' + pid;
+						window.open(url, '_blank');
+					});
+
+					kakao.maps.event.addListener(map, 'mouseout', function () {
+						infowindow.close();
+					});
+
+
+					// 리스트의 아이템을 클릭하면 정보들을 hidden 영역으로 전송
+					itemEl.onclick = function () {
+						if (praddress) {
+							document.getElementById('fulladdress').value = "[" + pname + "]" + praddress;
+						} else {
+							document.getElementById('fulladdress').value = "[" + pname + "]" + paddress;
+						}
+						document.getElementById('placeTitle').value = pname;
+						document.getElementById('placeLat').value = plat;
+						document.getElementById('placeLng').value = plng;
+						document.getElementById('placeId').value = pid;
+
+					};
+
+					itemEl.onmouseover = function () {
+						displayInfowindow(marker, pname);
+					};
+
+					itemEl.onmouseout = function () {
+						infowindow.close();
+					};
+				})(marker, places[i].place_name, places[i].road_address_name, places[i].address_name,
+					places[i].y, places[i].x, places[i].id);
+
+				fragment.appendChild(itemEl);
+			}
+
+			// 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+			listEl.appendChild(fragment);
+			menuEl.scrollTop = 0;
+
+			// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+			map.setBounds(bounds);
+		}
+
+
+		// 검색결과 항목을 Element로 반환하는 함수입니다
+		function getListItem(index, places) {
+
+			var el = document.createElement('li'),
+				itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
+					'<div class="info" style="cursor:pointer;">' +
+					'   <h5>' + places.place_name + '</h5>';
+
+			if (places.road_address_name) {
+				itemStr += '    <span>' + places.road_address_name + '</span>' +
+					'   <span class="jibun gray">' + places.address_name + '</span>';
+			} else {
+				itemStr += '    <span>' + places.address_name + '</span>';
+			}
+			itemStr += '  <span class="tel">' + places.phone + '</span>';
+
+			itemStr += '  <span class="sumitaddr">' + '<button class="addbtn4" onclick="close_modal()">선택 하기</button>' + '</span>'; +
+				'</div>';
+
+			el.innerHTML = itemStr;
+			el.className = 'item';
+
+			return el;
+		}
+
+
+
+		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+		function addMarker(position, idx, title) {
+			var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+				imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+				imgOptions = {
+					spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+					spriteOrigin: new kakao.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+					offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+				},
+				markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+				marker = new kakao.maps.Marker({
+					position: position, // 마커의 위치
+					image: markerImage
+				});
+
+			marker.setMap(map); // 지도 위에 마커를 표출합니다
+			markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+
+			return marker;
+		}
+
+		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+		function removeMarker() {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
+		}
+
+		//검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+		function displayPagination(pagination) {
+			var paginationEl = document.getElementById('pagination'),
+				fragment = document.createDocumentFragment(),
+				i;
+
+			// 기존에 추가된 페이지번호를 삭제합니다
+			while (paginationEl.hasChildNodes()) {
+				paginationEl.removeChild(paginationEl.lastChild);
+			}
+
+			for (i = 1; i <= pagination.last; i++) {
+				var el = document.createElement('a');
+				el.href = "#";
+				el.innerHTML = i;
+
+				if (i === pagination.current) {
+					el.className = 'on';
+				} else {
+					el.onclick = (function (i) {
+						return function () {
+							pagination.gotoPage(i);
+						}
+					})(i);
+				}
+
+				fragment.appendChild(el);
+			}
+			paginationEl.appendChild(fragment);
+		}
+
+
+		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+		// 인포윈도우에 장소명을 표시합니다
+		function displayInfowindow(marker, title) {
+			var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+
+			infowindow.setContent(content);
+			infowindow.open(map, marker);
+		}
+
+		// 검색결과 목록의 자식 Element를 제거하는 함수입니다
+		function removeAllChildNods(el) {
+			while (el.hasChildNodes()) {
+				el.removeChild(el.lastChild);
+			}
+		}
+
+	</script>
+
+	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script src="/js/slick.min.js"></script>
+	<script src="/js/board.js"></script>
+</body>
+
+</html>

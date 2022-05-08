@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+    <meta charset="UTF-8" />
+    <title>MOMO: 비밀번호 변경</title>
+    <link rel="stylesheet" href="/css/login.css"/>
+       <link rel="stylesheet" href="/css/fragment.css">
+       <link rel="stylesheet" href="/css/sidebar.css">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <th:block th:replace="fragments :: flg_header"></th:block>
+    </head>
+<body>
+
+<div th:include="member/mypagesidebar"> </div>
+
+<body class="login_body">
+    <div class="login_main">
+        <h1 class="">비밀번호 변경</h1>
+	<form class="" th:action="@{/member/pwdEdit}" method="post">
+
+  
+     <div class="inp_field">
+        <label th:for="password">기존 비밀번호</label>
+        <input type="password" class="" id="original_Pw" name="original_Pw" >
+    </div>
+ 	<div class="inp_field">
+        <label th:for="password">새로운 비밀번호</label>
+        <input type="password" class="" id="password" name="memPassword" >
+    </div>
+
+     <div class="inp_field">
+        <label for="password_check">새로운 비밀번호 확인</label>
+        <input type="password" class="form-control" id="password_check" name="password_check" >
+        <span id="pw_check_msg"></span>
+    </div>
+
+    <div class="">
+        <button class="lg_submit" id="submit_button" type="submit">수정</button>
+    </div>
+
+    <div class="">
+        <button class="lg_submit" type="button" onclick="window.history.back();">취소</button>
+    </div>
+</form>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/pwChange.js}"></script>
+</body>
+</html>

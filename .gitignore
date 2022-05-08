@@ -14,6 +14,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+.application.properties
+
 
 # External tool builders
 .externalToolBuilders/
@@ -67,5 +69,38 @@ local.properties
 ### Eclipse Patch ###
 # Spring Boot Tooling
 .sts4-cache/
+.metadata/
+.metadata/.plugins
+.metadata/.log
+.metadata/.plugins/com.genuitec.eclipse.devstyle/recent.json
+.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
+.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
+.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log
 
-# End of https://www.toptal.com/developers/gitignore/api/eclipse
+#이제 되었니..? 불태웠다,,
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+**/application.properties

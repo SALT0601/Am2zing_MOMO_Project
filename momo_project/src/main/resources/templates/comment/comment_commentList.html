@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>*</title>
+	<link rel="stylesheet" href="/css/commentList.css">
+</head>
+
+<body>
+	<div>
+		<table>
+
+			<tbody class="comments" id="divReloadLayer">
+				<tr th:each="comment : ${comments}">
+
+					<div class="comments" style="margin: 10px -10px 10px 20px; border-radius: 10px;">
+						<div style="display: flex;">
+							<div style="width: 100px; margin: 0; padding: 0;">
+								<span style="font-size: 18px; color: rgb(255, 187, 6); margin:0;" id="memNickname"
+									th:text="${comment.member.memNickname}"></span><span style="font-size: 13px; color: rgb(255, 187, 6); margin:0;"> (</span>
+								<span style="font-size: 13px; color: rgb(255, 187, 6); margin:0;" id="commentNic" 
+								th:text="${comment.member.memMbti}"></span><span style="font-size: 13px; color: rgb(255, 187, 6); margin:0;"> )</span>
+								<!--인증시 사용된 객체의 Username (ID)-->
+				
+								<div hidden id="memEmail" sec:authentication="name"></div>
+
+							</div>
+							<div style="width: 220px;word-break:break-all;">
+								<span style="color: rgb(53, 26, 29); font-size: 13pt; margin-right: 20px;"
+									th:text="${comment.commentContent}"></span>
+									
+							</div>
+							<div  style="width: 80px;">
+								<input th:if="${#authentication.name} == ${comment.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="button" style="background: none; border: none; width: 30px; margin: 0 auto;"
+									th:data-del="${comment.commentNum}" id="deleteBtn" class="deleteComment" value="❌">
+									<input th:unless="${#authentication.name} == ${comment.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="button" style="background: none; border: none;"
+									th:data-del="${comment.commentNum}"  id="deleteBtn" class="deleteComment" hidden value="5">
+							</div>
+						</div>
+						
+						<span hidden id="commentNum" th:text="${comment.commentNum}"></span>
+
+
+
+						<span hidden id="boardNum" th:boardNum="${boardNum}"></span>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script th:inline="javascript">
+		
+
+		$(document).ready(function () {
+
+		$("input:button.deleteComment").on('click', deleteComment);
+
+		});
+		function deleteComment() {
+	
+
+			let boardNum = document.getElementById("boardNum").value;
+
+			let commentNum = $(this).attr("data-del");
+		
+			var sendData = {"commentNum": commentNum, "boardNum": boardNum};
+			
+			
+				$.ajax({
+				method: 'Delete',
+				url: '/deleteComment/' + commentNum,
+				data: sendData,
+				success: function (data) {
+
+					$('#resDiv').html(data);
+
+
+				} 
+					});
+				
+
+			
+		};
+
+	</script>
+</body>
+
+</html>

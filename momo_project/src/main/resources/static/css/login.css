@@ -1,0 +1,180 @@
+@import "/css/fonts.css";
+* {
+    margin: 0;
+    padding: 0;
+    font-family: '빙그레','빙그레bold';
+}
+:root { 
+	-background: #424242; 
+	-navbar: #ffffff; 
+	-board-back: #ddd; 
+	-board-word: #000; 
+	-btn-col: #6e6e6e;
+}
+
+html {
+	font-size: 10px;
+}
+
+ul, li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit; /* 컬러는 상속 */
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	/* background: ; */
+	height: auto;
+	min-height: 100%;
+	padding-bottom: 80px;
+}
+
+.login_body {
+	
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: inherit;
+}
+
+.login_main {
+	box-shadow: 5px 5px 5px 5px gray;
+	width: 400px;
+	margin: 100px auto;
+	margin-bottom: 50px;
+	background: #0000;
+	border-radius: 10px;
+}
+
+.login_main h1 {
+	text-align: center;
+	padding: 20px 0 20px 0;
+	font-size: 40px;
+	border-bottom: 1px solid #000;
+}
+
+.login_main form {
+	padding: 0 40px;
+	box-sizing: border-box;
+}
+
+.inp_field_button {
+	position: center;
+	border-bottom: 2px solid #000;
+	margin: 30px 0;
+	
+}
+
+form .inp_field {
+	position: relative;
+	border-bottom: 2px solid #000;
+	margin: 30px 0;
+}
+
+.inp_field input {
+	width: 100%;
+	padding: 0 5px;
+	height: 40px;
+	font-size: 16px;
+	border: none;
+	background: none;
+	outline: none;
+}
+
+.inp_field label {
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	color: #999;
+	transform: translateY(-50%);
+	font-size: 16px;
+	pointer-events: none;
+	transition: 0.5s;
+	top: -5px;
+}
+
+.inp_field span::before {
+	content: '';
+	position: absolute;
+	top: 40px;
+	left: 0;
+	width: 0%;
+	height: 2px;
+	background: #585858;
+	transition: 0.5s;
+}
+.login_error{
+	text-align: center;
+	margin : 10px auto;
+	font-size: 1.5rem;
+	color: red;
+}
+
+/* .inp_field input:focus ~ label, .inp_field input:valid ~ label{
+	top: -5px;
+	color: #585858;
+}
+.inp_field input:focus ~ label .inp_field input:invalid ~ label{
+	top: -5px;
+	color: #585858;
+}
+
+.inp_field input:focus ~ span::before, .inp_field input:valid ~ span::before
+	{
+	width: 100%;
+}
+ */
+.forgot {
+	width: 100%;
+	display: flex;
+	margin: -5px 0 20px 5px;
+	color: #999;
+	cursor: pointer;
+}
+
+.forgot .id:hover, .forgot .pw:hover {
+	text-decoration: underline;
+}
+
+.lg_submit {
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	border: 1px solid white;
+	background: #FFCD4A;
+	border-radius: 25px;
+	font-size: 18px;
+	color: white;
+	font-weight: bold;
+	outline: none;
+	margin-bottom: 15px
+}
+
+.lg_submit:hover {
+	border-color: #FFCD4A;
+	transition: 0.5s;
+}
+
+.signup_link {
+	margin: 20px 0;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 16px;
+	color: #999;
+}
+
+.signup_link a {
+	color: #585858;
+}
+
+.signup_link a:hover {
+	text-decoration: underline;
+}

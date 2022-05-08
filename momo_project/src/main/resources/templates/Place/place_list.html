@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/addplace.css">
+	<title>PlaceList</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style>
+		.deletePlace {
+		    width:50px;
+		    height:30px;	 
+		    background-color:#FFCD4A;
+		    border:0;
+		    border-radius: 10px;
+		    font-size:13px;
+		    font-weight: bold;
+		    color: rgb(0, 0, 0);
+		    cursor:pointer;
+    }
+    
+    table tbody td {
+		  border-top: 1rem solid black;
+		  border-bottom: 1rem solid;
+		  border-color: transparent;
+}
+
+.add_place{
+	display: flex;
+  	justify-content: space-between;
+  	align-items: center;
+ 	padding: 10px;
+ 	
+ 	margin-top: 10px;
+ 	margin-bottom: 10px;
+ 	border:3px solid #FFCD4A;
+ 	border-radius: 10px;
+ 	width: 470px;
+ 	box-shadow: 2px 2px 2px 2px lightgray;
+ 	background-color: white;
+ 	text-align: center;
+}
+
+
+	</style>
+</head>
+<body>
+<div style="height:500px; overflow:auto; padding: 5px;" >
+
+        
+        <!-- <tbody > -->
+      
+        <div class="add_place" th:each="place : ${places}" >
+      
+            <div style="font-weight:bold; word-break:break-all; font-size:17px; width:30%;">
+                <span th:text="${place.placeTitle}"></span>
+            </div>
+            <div style="text-align:center; word-break:break-all; font-size:17px; width:30%;">
+                <span th:text="${place.placeContent}"></span>
+            </div>
+            <div style="width:10%;">
+            <span hidden id="boardNum" th:boardNum="${place.board.boardNum}"></span>
+            <input type="button" class="deletePlace" th:data-del="${place.placeNum}"
+             value="삭제">
+            </div>
+        </div>
+         
+      <!--   
+        </tbody> -->
+      
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("input:button.deletePlace").on('click',deletePlace);
+	
+});
+
+function deletePlace(){
+	let boardNum = document.getElementById("boardNum").value;
+    let placeNum = $(this).attr("data-del");
+    var sendData = {"boardNum": boardNum};
+    $.ajax({
+        method: 'DELETE',
+        url : '/deletePlace/'+placeNum,
+        data : sendData,
+        success: function(data){
+        	$('#resDiv').html(data)
+        }
+    });
+
+}
+</script>
+</body>
+</html>

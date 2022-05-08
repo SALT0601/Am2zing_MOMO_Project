@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>MOMO: 회원정보 수정</title>
+<link rel="stylesheet" href="/css/login.css"/>
+   <link rel="stylesheet" href="/css/sidebar.css">
+   <link rel="stylesheet" href="/css/fragment.css">
+   
+</head>
+<th:block th:replace="fragments :: flg_header"></th:block>
+<div th:include="member/mypagesidebar"> </div>
+
+
+
+
+<body class="login_body">
+	<div class="login_main">
+		<h1>내정보 수정</h1>
+	   <form  th:action="@{/member/myinfoEdit}" method="post" th:object="${member}">
+ 
+  
+
+
+        <input type="hidden" th:field="*{memId}" th:readonly="readonly" >
+        <input type="hidden" th:field="*{memRole}" th:readonly="readonly" >
+
+
+      <div class="inp_field">
+            <label th:for="memEmail">이메일</label>
+            <input type="email" th:field="*{memEmail}" th:readonly="readonly" >
+        </div>
+		<div>
+           <div class="inp_field">
+           	<label th:for="memNickname">닉네임</label>
+            <input type="text"  name="memNickname" th:field="*{memNickname}" autocomplete="off">
+           </div>
+           <div class="inp_field"  style="margin-top:-15px;">
+        	<input type="button" id="memNicknameOverlay" onclick="memNicknameCheck()" value="중복 체크"/>
+        	<input type="button" id="resetMemNickname" onclick="reMemNickname()"  style = "display:none;" disabled value="다시입력"/>
+        </div>
+        </div>
+			<div class="inp_field" >
+            <label style="top:-5px;" for="memBirth">생년월일</label>
+             <input id="birthdate" type="date" name="memBirth" th:value="*{memBirth}">
+             </div>
+	
+		 <div class="inp_field" style="border:none;">
+                 <label style="top:-8px;" for="memMbti">MBTI</label>
+            <div id="memMbti" onchange="checkMbti()">
+            <select name="memMbti" style="margin-top: 10px">
+             <option th:value="*{memMbti}" th:name="*{memMbti}" selected>[[*{memMbti}]]</option>
+             <option value="ISTJ" th:name="ISTJ" th:if="*{memMbti} != ISTJ">ISTJ</option>
+             <option value="ISTP" th:name="ISTP" th:if="*{memMbti} != ISTP">ISTP</option>
+             <option value="ISFJ" th:name="ISFJ" th:if="*{memMbti} != ISFJ">ISFJ</option>
+             <option value="ISFP" th:name="ISFP" th:if="*{memMbti} != ISFP">ISFP</option>
+             <option value="INTJ" th:name="INTJ" th:if="*{memMbti} != INTJ">INTJ</option>
+             <option value="INTP" th:name="INTP" th:if="*{memMbti} != INTP">INTP</option>
+             <option value="INFJ" th:name="INFJ" th:if="*{memMbti} != INFJ">INFJ</option>
+             <option value="INFP" th:name="INFP" th:if="*{memMbti} != INFP">INFP</option>
+             <option value="ESTJ" th:name="ESTJ" th:if="*{memMbti} != ESTJ">ESTJ</option>
+             <option value="ESTP" th:name="ESTP" th:if="*{memMbti} != ESTP">ESTP</option>
+             <option value="ESFJ" th:name="ESFJ" th:if="*{memMbti} != ESTJ">ESFJ</option>
+             <option value="ESFP" th:name="ESFP" th:if="*{memMbti} != ESFP">ESFP</option>
+             <option value="ENTJ" th:name="ENTJ" th:if="*{memMbti} != ENTJ">ENTJ</option>
+             <option value="ENTP" th:name="ENTP" th:if="*{memMbti} != ENTP">ENTP</option>
+             <option value="ENFJ" th:name="ENFJ" th:if="*{memMbti} != ENFJ">ENFJ</option>
+             <option value="ENFP" th:name="ENFP" th:if="*{memMbti} != ENFP">ENFP</option>
+           </select>
+           <span id="Mbti_check_msg"></span>
+           </div>
+           </div>
+        
+     
+        <div >
+           	<button class="lg_submit" onclick="return confirm('수정 하시겠습니까?');" th:formaction="@{/member/myinfoEdit}">수정</button>
+        </div>
+         <div >
+          	<button class="lg_submit" onclick="return confirm('정말 탈퇴하시겠습니까?');" th:formaction="@{/memeber/withdrawal}" >회원 탈퇴</button>
+        </div>
+
+        <div >
+          	<button class="lg_submit" onclick="window.history.back();">취소</button>
+        </div>
+
+    </form>
+    </div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/Edit.js"></script>
+
+
+</body>
+</html>
+  
+    

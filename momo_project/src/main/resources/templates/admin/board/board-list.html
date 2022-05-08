@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:replace="fragments :: flg_head"></th:block>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script
+		  src="https://kit.fontawesome.com/5168478d86.js"
+		  crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" href="/css/common.css" />
+		<link rel="stylesheet" href="/css/sidebutton.css" />
+		<link rel="stylesheet" href="/css/admin-list.css" />
+		<title>MOMO: 관리자 게시글 관리</title>
+		<th:block th:replace="fragments :: flg_header"></th:block>
+	  </head>
+<body>
+	<div class="inner">
+		<div class="all inner">
+		  <aside>
+			  <div class="button_1" onclick="location.href='/admin/member/member-list'">회원관리</div>
+			  <div class="button_2" onclick="location.href='/admin/board/board-list'">전체게시글관리</div>
+			  <div class="button_3" onclick="location.href='/admin/comment/comment-list'">전체댓글관리</div>
+		  </aside>
+  
+		  <!--------------------end of aside------------------->
+  
+		  <section class="contents">
+			<div class="policy-container">
+			  <div class="policy-table">
+				<div class="headings">
+				  <span class="heading">제목</span>
+				  <span class="heading">닉네임</span>
+				  <span class="heading">view</span>
+				  <span class="heading">삭제</span>
+				</div>
+  
+				<th:block th:each="board : ${boards}" th:object="${board}">
+				  <div class="policy">
+					<span th:text="*{boardTitle}"></span>
+					<span th:text="*{member.memNickname}"></span>
+					<span><a th:href="@{/admin/board/board-detail/{id}(id = ${board.boardNum})}">view</a></span>
+					<span>
+					<form th:action="@{'/admin/board-delete/' + ${board.boardNum}}" name="removefrm" method="post">
+						<input type="hidden" name="_method" value="delete" />
+						<input type="submit" class="delete_btn" id="delete_btn" value="삭제" onclick="if(!confirm('정말로 삭제하시겠습니까?')){return false;}">
+					</form>
+				</span>
+				  </div>
+				</th:block>
+			  </div>
+			</div>
+			<div th:replace="fragments :: paging"></div>
+		  </section>
+		</div>
+	  </div>
+	
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+	<title>MOMO: 게시판</title>
+	<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/detail.css">
+</head>
+
+<body style="margin: 0; padding: 0;  ">
+
+	<div class="container map_wrap">
+
+
+		<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden; text-align: center; ">
+		</div>
+
+
+		<div id="title">
+			<div>
+				<span style=" margin-left: 10px;color: rgb(0, 0, 0);font-size: 15px;"
+					th:text="@{${board.member.memNickname}}"></span><span
+					style="color: rgb(0, 0, 0);font-size: 15px;">님의</span>
+			</div>
+			<div style="display: inline-block; width: 340px; word-break:break-all;  ">
+				<span style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 800; margin-left: 10px;
+				text-shadow:1px 1px 1px #000;" th:text="${board.boardTitle}"></span>
+			</div>
+
+		</div>
+		<div id="btns-box">
+
+			<div class="btns" style="display: flex; justify-content: space-evenly; align-items:center;  ">
+
+				<a th:href="@{/}" role="button"><button><i class="fas fa-home fa-xl"></i></button></a>
+				<a th:href="@{/board}" role="button"><button><i class="fas fa-bars fa-xl"></i></button></a>
+				<div id="bookmark-buttons">
+					<button th:if="${boardBookmarkCheck} == true" id="btn-bookmark" type="button"> <i
+							class="far fa-heart fa-xl"></i></button>
+					<button style="text-align: center;" th:unless="${boardBookmarkCheck} == true" id="btn-unbookmark"
+						type="button">
+						<i class="fas fa-heart fa-xl"></i></button>
+				</div>
+				<div>
+					<a th:if="${#authentication.name} == ${board.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" 
+						th:href=" @{'/post/edit/' + ${board.boardNum}}" role="button"><button><i
+								class="fas fa-edit fa-xl"></i></button></a>
+					<a th:unless="${#authentication.name} == ${board.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" hidden
+						th:href=" @{'/post/edit/' + ${board.boardNum}}" role="button"><button><i
+								class="fas fa-edit fa-xl"></i></button></a>
+				</div>
+				<div>
+					<form th:action="@{'/post/' + ${board.boardNum}}" method="post">
+						<input type="hidden" name="_method" value="delete" />
+						<button th:if="${#authentication.name} == ${board.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="submit"><i
+								class="fas fa-trash-alt fa-xl"></i></button>
+						<button th:unless="${#authentication.name} == ${board.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" hidden type="submit"><i
+								class="fas fa-trash-alt fa-xl"></i></button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="menu_wrap">
+			<div class="box box1">
+				<div class="item3 list-color  " style=" margin-top: 10px;" th:each="place : ${places}">
+					<div class="item3-place" style="margin: 10px;">
+						<a hidden th:name="@{${place.placeNum}}"></a>
+						<h2 style="font-size: 22px; color:#FFCD4A; font-weight: 600; text-shadow:1px 1px 1px #000;"
+							th:text="${place.placeTitle}"></h2><br>
+						<img style="border-radius: 10px; width: 120px; height: 120px; cursor: pointer;"
+							th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt=''><br>
+						<div style=" word-break:break-all;">
+							<span style="font-size: 18px;" th:text="${place.placeContent}"></span>
+						</div>
+
+					</div>
+
+				</div>
+				<p style="text-align: center; margin-top: 10px;"><button class="hide1">댓글보기</button></p>
+			</div>
+			<div hidden class="box box1">
+				<form method="post" action="/place/reply?cmd=save">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+
+					<div style="margin-top:10px;">
+						<textarea  spellcheck="false" style="padding: 5px;" placeholder="댓글을 입력해주세요" name="commentContent" id="commentContent"></textarea>
+						<input hidden type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
+
+
+					</div>
+
+
+
+
+
+
+				</form>
+
+				<button id="btnSave">저장</button>
+
+
+				<div id="resDiv" style="margin-top: 5px; ">
+				</div>
+				<p><button class="hide1">장소보기</button></p>
+
+			</div>
+
+		</div>
+
+
+
+	</div>
+
+	<!-- div con -->
+	<input hidden id="memEmail" name="memEmail" th:value="${#authentication.name}">
+	<script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
+	<script th:inline="javascript">
+
+
+
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+			mapOption = {
+				center: new kakao.maps.LatLng(37.5546, 126.9706), // 지도의 중심좌표
+				level: 5 // 지도의 확대 레벨
+			};
+
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
+
+		var places = [];
+
+		/*<![CDATA[*/
+
+		/*[# th:each="place : ${places}"]*/
+		var title = [[${place.placeTitle}]];
+		var lat = [[${place.placeLat}]];
+		var lng = [[${place.placeLng}]];
+		var content = [[${place.placeContent}]];
+		var id = [[${place.placeId}]];
+		var placeImg = [[${place.placeImg}]];
+		var placeNum = [[${place.placeNum}]];
+
+
+		places.push({
+			title: title, latlng: new kakao.maps.LatLng(lat, lng), content: content, id: id,
+			placeImg: placeImg, placeNum: placeNum
+		});
+
+		/*[/]*/
+
+		/*]]>*/
+
+
+		// 마커 이미지의 이미지 주소입니다
+		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+		function setCenter() {
+			// 이동할 위도 경도 위치를 생성합니다 
+			var moveLatLon = places[0].latlng;
+			map.setLevel(8);
+			// 지도 중심을 이동 시킵니다
+			map.setCenter(moveLatLon);
+		}
+
+
+		function displayInfowindow(marker, title) {
+			var content = '<div class="info-title" style="  font-size: 12pt; text-shadow:1px 1px 1px #000; font-weight: 700; text-align:center; color:#FFCD4A; width:200px;text-align:center;padding:6px 0">'
+				+ title + '</div>';
+
+			infowindow.setContent(content);
+			infowindow.open(map, marker);
+		}
+
+		setCenter();
+
+		for (var i = 0; i < places.length; i++) {
+
+			// 마커 이미지의 이미지 크기 입니다
+			var imageSize = new kakao.maps.Size(24, 35);
+
+			// 마커 이미지를 생성합니다    
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				map: map, // 마커를 표시할 지도
+				position: places[i].latlng, // 마커를 표시할 위치
+				title: places[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+				image: markerImage // 마커 이미지 
+			});
+
+
+			(function (marker, title, pid) {
+				kakao.maps.event.addListener(marker, 'mouseover', function () {
+					displayInfowindow(marker, title);
+
+				});
+
+				kakao.maps.event.addListener(marker, 'click', function () {
+					var position = this.getPosition();
+
+					var url = 'https://map.kakao.com/link/map/' + pid;
+					window.open(url, '_blank');
+				});
+				kakao.maps.event.addListener(marker, 'mouseout', function () {
+					infowindow.close();
+				});
+			})(marker, places[i].title, places[i].id);
+
+		}
+
+
+		//이미지 자세히 보기
+		var img = document.getElementsByTagName("img");
+		for (var x = 0; x < img.length; x++) {
+			img.item(x).onclick = function () {window.open(this.src);};
+		}
+
+
+		//댓글 장소 체인지 버튼
+		$('button.hide1').click(function () {
+			$('.box1').toggle();
+		});
+
+
+
+		//댓글저장
+		$('#btnSave').click(function () {
+			var mem = $('input[name="memEmail"]').val();
+			if (mem == "anonymousUser") {
+				alert("로그인 후 이용해주세요.");
+				location.href = "http://localhost:9090/member/login";
+			} else {
+				let boardNum = document.getElementById("boardNum").value;
+				var tempData = {
+
+					"boardNum": $('input[name="boardNum"]').val(),
+					"commentContent": $('#commentContent').val(),
+					"memEmail": $('input[name="memEmail"]').val()
+
+
+				};
+				console.log(tempData);
+				var comment = $('#commentContent').val();
+				if (comment != "") {
+					$.ajax({
+						url: "/commentList/" + boardNum,
+						type: "POST",
+						async: true,
+						contentType: "application/json; charset=UTF-8",
+						data: JSON.stringify(tempData),
+						success: function (data) {
+
+							$('#commentContent').val();
+							$('#resDiv').html(data);
+							$('textarea[name="commentContent"]').val("");
+						},
+						error: function () {alert("에러 발생");}
+
+
+					});
+				}
+			}
+
+
+		});
+		
+		//새로고침 유지
+		$(document).ready(function () {
+
+
+			let boardNum = document.getElementById("boardNum").value;
+			var tempData = {
+
+				"boardNum": $('input[name="boardNum"]').val(),
+
+			};
+			console.log(tempData);
+			var comment = $('#commentContent').val();
+
+			$.ajax({
+				url: "/commentList02/" + boardNum,
+				type: "POST",
+				async: true,
+				contentType: "application/json; charset=UTF-8",
+				data: JSON.stringify(tempData),
+				success: function (data) {
+
+					$('#commentContent').val();
+					$('#resDiv').html(data);
+
+				}
+
+			});
+
+		});
+		//게시글 북마크
+		$('#btn-bookmark').click(function () {
+			let boardNum = document.getElementById("boardNum").value;
+			let sendData = {"boardNum": boardNum};
+			$.ajax({
+				method: 'POST',
+				url: '/boardBookmark',
+				data: sendData,
+				success: function (data) {
+					window.location.href = data;
+				},
+				error: function () {
+					console.log('ajax 통신 실패');
+				}
+			});
+		});
+
+		//게시글 북마크 해제
+		$('#btn-unbookmark').click(function () {
+			let boardNum = document.getElementById("boardNum").value;
+			let deleteData = {"boardNum": boardNum};
+			$.ajax({
+				method: 'POST',
+				url: '/unBoardBookmark',
+				data: deleteData,
+				success: function (data) {
+					window.location.href = data;
+				},
+				error: function () {
+					console.log('ajax 통신 실패');
+				}
+			});
+		});
+
+	</script>
+</body>
+
+</html>

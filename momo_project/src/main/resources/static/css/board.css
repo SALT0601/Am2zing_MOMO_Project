@@ -1,0 +1,358 @@
+@charset "utf-8";
+@import "/css/fonts.css";
+* {
+    margin: 0;
+    padding: 0;
+    font-family: '빙그레','빙그레bold';
+}
+
+clearfix::before,
+clearfix::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+a {
+    text-decoration: none;
+}
+
+li,
+ol,
+ul {
+    list-style: none;
+}
+
+table {
+    border-spacing: 0;
+}
+
+input:focus {
+    outline: none;
+}
+
+
+#wrap {
+    width: 100%;
+    margin: 0px auto;
+}
+
+.inner {
+    width: 1440px;
+    margin: 0 auto;
+}
+
+
+
+/* ------------------end of header----------------- */
+
+section {
+    width: 100%;
+    height: 800px;
+    border-radius: 10px;
+
+
+    background: linear-gradient(90deg, #e1e1e1 50%, #fbffd7 50%);
+
+
+}
+
+.sec_left {
+    float: left;
+    width: calc(100%/2);
+    height: 100%;
+    /* background-color: rgb(194, 227, 174); */
+}
+
+/* 제목 입력 div */
+.fortitle {
+    text-align: center;
+    padding-top: 35px;
+}
+
+/* 제목 입력 */
+#title {
+    width: 640px;
+    height: 70px;
+    background-color: rgb(203, 203, 203);
+    border: 3px solid rgb(187, 187, 187) ;
+    border-radius: 10px;
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(68, 68, 68);
+    margin-bottom: 20px;
+}
+
+/* 장소찾기 */
+.locationbtn {
+    display: block;
+    width: 500px;
+    height: 50px;
+    border: 0;
+    border-radius: 10px;
+    background-color: rgb(134, 190, 126);
+    color: rgb(68, 68, 68);
+    font-size: 15pt;
+    font-weight: bold;
+    margin: 20px auto 20px auto;
+    text-align: center;
+    cursor: pointer;
+    
+}
+
+/* 이미지 첨부 미리보기 div */
+#image_preview{
+    position: relative;
+    width:100%;
+    height:160px;
+}
+
+/* 카메라이미지 */
+.cameraImg{
+    position:absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:130px;
+    height:130px;
+    margin-left: 40px;
+    border:3px solid rgb(143, 143, 143);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* 첨부한 사진이 뜨는 곳 */
+#att_zone {
+    float:right;
+    width: 500px;
+    min-height: 150px;
+    padding: 10px;
+    /* border: 1px dotted #00f; */
+    margin-right: 25px;
+    margin-top:-35px;
+}
+
+/* 첨부한 사진 없이 비어있을때 */
+#att_zone:empty:before {
+    content: attr(data-placeholder);
+    color: #999;
+    font-size: .9em;
+}
+
+/* 커멘트 div */
+#commentbox{
+    width:100%;
+    height:350px;
+}
+
+/* 커멘트 */
+.comment{
+    width:630px;
+    height:300px;
+    margin:0 40px 0 40px;
+    padding-left:10px;
+    padding-top:10px;
+    border: 3px solid rgb(187, 187, 187) ;
+    border-radius: 10px;
+    background-color: rgb(203, 203, 203);
+    font-size: 20px;
+    color: rgb(68, 68, 68);
+    resize: none;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+
+
+.comment2{
+    margin:0 40px 0 40px;
+    padding-left:10px;
+    border: 3px solid rgb(187, 187, 187) ;
+    border-radius: 10px;
+    background-color: rgb(203, 203, 203);
+    font-size: 15px;
+    color: rgb(68, 68, 68);
+    resize: none;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+
+
+
+/* 스크롤바 막대 설정*/
+.comment::-webkit-scrollbar{
+    width: 10px;
+    cursor: pointer;
+}
+
+.comment::-webkit-scrollbar-thumb{
+    height: 17%;
+    background-color: rgba(255,255,255,1);
+    /* 스크롤바 둥글게 설정    */
+    border-radius: 10px;    
+}
+
+/* 스크롤바 뒷 배경 설정*/
+.comment::-webkit-scrollbar-track{
+    background-color: rgba(0,0,0,0);
+}
+
+/* 추가버튼 div */
+#addbtnbox{
+    width:690px;
+    height:70px;
+    padding-right:20px;
+}
+
+/* 추가버튼*/
+.addbtn{
+    float:bottom;
+    width:100px;
+    height:50px;
+    background-color: orange;
+    border:3px solid rgb(255, 161, 28);
+    border-radius: 10px;
+    font-size:18px;
+    font-weight: bold;
+    color: rgb(68, 68, 68);
+    cursor:pointer;
+}
+
+.addbtn2{
+	margin-left:10px;
+    float:right;
+    width:100px;
+    height:50px;
+    background-color: orange;
+    border:3px solid rgb(255, 161, 28);
+    border-radius: 10px;
+    font-size:18px;
+    font-weight: bold;
+    color: white;
+    cursor:pointer;
+}
+
+
+.addbtn3{
+	margin:5px;
+    width:100px;
+    height:40px;
+    background-color: orange;
+    border:3px solid rgb(255, 161, 28);
+    border-radius: 10px;
+    font-size:18px;
+    font-weight: bold;
+    color: white;
+    cursor:pointer;
+}
+
+
+
+/* ------------end of sec_left------------ */
+
+.sec_right {
+    float: left;
+    width: calc(100%/2);
+    height: 100%;
+    background-color: rgb(237, 237, 177);
+    border-radius: 10px;
+
+}
+/* 
+#places{
+} */
+
+
+.myplace{
+
+    margin:0 auto;
+    width: 640px;
+    height: 150px;
+    text-align: center;
+    border: 3px solid rgb(187, 187, 187);
+    border-radius: 10px;
+}
+
+
+
+
+
+
+/* ------------end of sec_right------------ */
+
+.sec_bottom{
+    margin-top: 30px;
+    height:60px;
+}
+
+.cancelbtn{
+    float:left;
+    width:140px;
+    height:50px;
+    left:0;
+    background-color: rgb(203, 203, 203);
+    border: 3px solid rgb(187, 187, 187) ;
+    border-radius: 10px;
+    font-size:18px;
+    font-weight: bold;
+    color: rgb(68, 68, 68);
+    cursor:pointer;
+}
+
+.savebtn{
+    float:right;
+    width:140px;
+    height:50px;
+    background-color: rgb(203, 203, 203);
+    border: 3px solid rgb(187, 187, 187) ;
+    border-radius: 10px;
+    font-size:18px;
+    font-weight: bold;
+    color: rgb(68, 68, 68);
+    cursor:pointer;
+}
+
+/* ------------------end of section----------------- */
+
+footer {
+    width: 100%;
+    height: 300px;
+    color: rgb(239, 239, 239);
+    background-color: rgb(74, 74, 74);
+    margin-top: 100px;
+}
+
+.foot1 {
+    float: left;
+    width: 40%;
+    height: 100%;
+    font-size: 14pt;
+}
+
+.foot1 h3 {
+    color: orangered;
+    font-size: 25pt;
+    margin: 40px 0px 10px 50px;
+}
+
+.foot1 p {
+    margin-left: 50px;
+}
+
+.foot2 {
+    float: left;
+    width: 50%;
+    height: 100%;
+    font-size: 14pt;
+}
+
+.foot2 h3 {
+    font-size: 25pt;
+    margin: 40px 0px 10px 0px;
+}
+
+.foot2 p {
+    margin-left: 0px;
+}
+
+/* ------------------end of footer----------------- */

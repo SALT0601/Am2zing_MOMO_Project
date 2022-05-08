@@ -1,0 +1,13 @@
+@import "/css/fonts.css";
+* {font-family: '빙그레','빙그레bold';}
+.comments {
+			width: 400px;
+			margin: 10px 0 30px 10px;
+			padding: 5px;
+
+			background-color: rgb(255, 255, 255);
+			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+			font-size: 12px;
+			border-radius: 10px;
+
+		}

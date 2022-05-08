@@ -1,0 +1,14 @@
+
+@font-face {
+  font-family: "빙그레";
+  font-weight: 400;
+  src: url("../font/BINGGRAEMELONA.TTF") format("truetype"),
+  url("../font/BINGGRAEMELONA.eot") format("embedded-opentype");
+}
+
+@font-face {
+  font-family: "빙그레bold";
+  font-weight: 700;
+  src: url("../font/BINGGRAEMELONA-BOLD.TTF") format("truetype"),
+  url("../font/BINGGRAEMELONA-BOLD.eot") format("embedded-opentype");
+}
