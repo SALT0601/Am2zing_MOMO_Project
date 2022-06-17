@@ -13,7 +13,7 @@ import com.momo.domain.Member;
 
 
 // Authentication 객체에 저장할 수 있는 유일한 타입
-public class PrincipalDetails implements UserDetails {// , OAuth2User{
+public class PrincipalDetails implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	private Member member;
@@ -23,7 +23,6 @@ public class PrincipalDetails implements UserDetails {// , OAuth2User{
 	public PrincipalDetails(Member member) {
 		this.member = member;
 	}
-	
 	
 	
 	public Member getMember() {
@@ -41,26 +40,26 @@ public class PrincipalDetails implements UserDetails {// , OAuth2User{
 	}
 
 	@Override
-	public boolean isAccountNonExpired() {
+	public boolean isAccountNonExpired() { // 계정 만료 여부
 		return true;
 	}
 
 	@Override
-	public boolean isAccountNonLocked() {
+	public boolean isAccountNonLocked() { // 계정 잠김 여부 
 		return true;
 	}
 
 	@Override
-	public boolean isCredentialsNonExpired() {
+	public boolean isCredentialsNonExpired() { // 계정 패스워드 만료 여부 
 		return true;
 	}
 
 	@Override
-	public boolean isEnabled() {
+	public boolean isEnabled() { // 사용 가능한 계정인지 
 		return true;
 	}
 	
-	@Override
+	@Override // 권한 처리 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collet = new ArrayList<GrantedAuthority>();
 		collet.add(()->{ return member.getMemRole();});

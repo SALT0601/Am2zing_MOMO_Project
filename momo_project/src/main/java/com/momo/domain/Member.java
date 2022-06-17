@@ -37,9 +37,6 @@ public class Member {
 	private String memNickname;
 	private String memImg;
 	private String memRole; //ROLE_USER, ROLE_ADMIN
-	// OAuth를 위해 구성한 추가 필드 2개
-//	private String provider;
-//	private String providerId;
 	@CreationTimestamp
 	private Timestamp createDate;
 	

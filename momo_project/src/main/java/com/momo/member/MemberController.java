@@ -87,9 +87,7 @@ public class MemberController {
 		return "member/member_loginForm"; 
 		} 
 	
-	/* 로그인 에러 *
-
-	*/
+	/* 로그인 에러 */
     @PostMapping("member/login")
     public String loginError(HttpServletRequest request, Model model) {
         String loginFailMsg = (String) request.getAttribute("loginFailMsg");
