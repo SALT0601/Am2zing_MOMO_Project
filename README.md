@@ -128,3 +128,4 @@ Spring Boot의 MVC패턴을 기반으로 만든 MBTI별 장소공유 게시판 �
 
 - ## 웹 전체 실행 영상 
 
+- https://youtu.be/4TI2ir6zVqQ
